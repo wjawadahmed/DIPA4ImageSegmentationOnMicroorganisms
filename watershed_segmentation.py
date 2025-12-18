@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+#DIP4
 # Function for performing watershed segmentation on an image
 def watershed_segmentation(img_path):
     # Read the image

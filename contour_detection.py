@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 # Function for detecting contours in an image
 def contour_detection(img_path):
     # Read the image
+#DIP4
+    
     img = cv2.imread(img_path)
     
     # Convert the image to grayscale

@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 # Function for performing Canny edge detection
+#DIP4
+
 def canny_edge_detection(img_path):
     # Read the image in grayscale
     img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)

@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 # Function for performing K-means segmentation on an image
+#DIP4
+
 def kmeans_segmentation(img_path):
     # Read the image
     img = cv2.imread(img_path)

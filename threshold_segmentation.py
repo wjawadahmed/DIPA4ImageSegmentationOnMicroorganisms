@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+#DIP4
+
 # Function for performing threshold segmentation on an image
 def threshold_segmentation(img_path):
     # Read the image in grayscale

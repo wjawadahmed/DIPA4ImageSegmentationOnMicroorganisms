@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import SimpleITK as sitk
+#DIP4
 
 # Function for performing Fast Marching segmentation
 def fast_marching_segmentation(inputFilename, outputFilename, seedX, seedY, Sigma, SigmoidAlpha, SigmoidBeta, TimeThreshold, StoppingTime):
