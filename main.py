@@ -1,25 +1,27 @@
 import os
 import cv2
 import matplotlib.pyplot as plt
-# from fast_marching_segmentation import fast_marching_segmentation
+
 from threshold_segmentation import threshold_segmentation
 from canny_edge_detection import canny_edge_detection
 from contour_detection import contour_detection
 from kmeans_segmentation import kmeans_segmentation
 from watershed_segmentation import watershed_segmentation
 
-# Paths to your images
+# Base directory (current project folder)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Paths to input images (relative paths)
 img_paths = [
-    '/home/hussain/Classical Image Segmentation/test_data/EMDS5-g01-40.png','/home/hussain/Classical Image Segmentation/test_data/EMDS5-g02-21.png'
+    os.path.join(BASE_DIR, 'test_data', 'EMDS5-g01-40.png'),
+    os.path.join(BASE_DIR, 'test_data', 'EMDS5-g02-21.png')
 ]
 
-import os
-
-# Create a directory to save the results
-output_dir = 'segmentation_results'
+# Output directory
+output_dir = os.path.join(BASE_DIR, 'segmentation_results')
 os.makedirs(output_dir, exist_ok=True)
 
-# Perform segmentation
+# Segmentation functions
 segmentation_functions = [
     ("Threshold Segmentation", threshold_segmentation),
     ("Canny Edge Detection", canny_edge_detection),
@@ -29,12 +31,18 @@ segmentation_functions = [
 ]
 
 results = []
+
 for img_path in img_paths:
-    img_name = img_path.split('/')[-1].split('.')[0]
-    img_results = [(seg_name, segmentation_func(img_path)) for seg_name, segmentation_func in segmentation_functions]
+    img_name = os.path.splitext(os.path.basename(img_path))[0]
+    img_results = []
+
+    for seg_name, segmentation_func in segmentation_functions:
+        segmented_img = segmentation_func(img_path)
+        img_results.append((seg_name, segmented_img))
+
     results.append((img_name, img_results))
 
-# Create a single image with sub-images
+# Visualization
 num_imgs = len(img_paths)
 num_segs = len(segmentation_functions)
 
@@ -45,7 +53,7 @@ for i, (img_name, img_results) in enumerate(results):
         ax = axes[i, j] if num_imgs > 1 else axes[j]
         ax.imshow(result, cmap='gray')
         ax.axis('off')
-        ax.set_title(f"{seg_name}")
+        ax.set_title(seg_name)
 
 plt.tight_layout()
 plt.savefig(os.path.join(output_dir, 'segmentation_results.png'))
